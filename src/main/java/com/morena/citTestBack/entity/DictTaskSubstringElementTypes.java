@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DictTaskSubstringElementTypes extends BaseModelDictionaryEntity {
 }

@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class TaskSquareElements extends BaseModelEntity {
 
     @Column(name = "matrix_entry")
-    private String matrixEntry;
+    private Long matrixEntry;
 
     @Column(name = "order_in_list")
     private Long order;
