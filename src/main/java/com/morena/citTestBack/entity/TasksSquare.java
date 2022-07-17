@@ -14,6 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class TasksSquare extends BaseModelEntity {
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy="task", fetch = FetchType.LAZY)
     private Set<TaskSquareElements> elements;
 }

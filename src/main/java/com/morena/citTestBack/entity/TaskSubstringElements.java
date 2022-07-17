@@ -20,6 +20,7 @@ public class TaskSubstringElements extends BaseModelEntity {
     @JoinColumn(name="element_type", referencedColumnName = "code")
     private DictTaskSubstringElementTypes elementType;
 
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="task_ref", referencedColumnName = "unique_id")
     private TasksSubstring task;

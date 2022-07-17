@@ -19,6 +19,7 @@ public class TaskSquareElements extends BaseModelEntity {
     @Column(name = "order_in_list")
     private Long order;
 
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="task_ref", referencedColumnName = "unique_id")
     private TasksSquare task;
