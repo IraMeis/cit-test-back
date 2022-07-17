@@ -2,6 +2,7 @@ package com.morena.citTestBack.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DTasksSubstring {
+public class DTasksSubstring implements DTask {
 
     private Long id;
     private UUID uuid;

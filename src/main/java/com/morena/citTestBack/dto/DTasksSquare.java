@@ -10,7 +10,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DTasksSquare {
+public class DTasksSquare implements DTask {
 
     private Long id;
     private UUID uuid;
