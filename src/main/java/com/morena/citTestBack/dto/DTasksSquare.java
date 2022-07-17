@@ -12,6 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DTasksSquare implements DTask {
 
+    private final long typeCode = 2;
+
     private Long id;
     private UUID uuid;
     private String createdTimestamp;

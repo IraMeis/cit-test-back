@@ -13,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DTasksSubstring implements DTask {
 
+    private final long typeCode = 1;
+
     private Long id;
     private UUID uuid;
     private String createdTimestamp;
