@@ -1,7 +1,9 @@
 package com.morena.citTestBack.controller;
 
 import com.morena.citTestBack.dto.DTasksSubstring;
+import com.morena.citTestBack.service.TasksSubstringService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TasksSubstringController {
 
+    private final TasksSubstringService tasksSubstringService;
+
     /**
-     * /api/substring/create
+     * Creates substring task
+     * /api/substring/create POST
      * @param task json with 2 lists of strings - array1 and array2
-     * @return
      */
     @PostMapping("/create")
     public ResponseEntity<?> createSubstring(@RequestBody DTasksSubstring task) {
-        return null;
+        return tasksSubstringService.saveSubstringTask(task) ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
 
     /**

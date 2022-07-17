@@ -1,7 +1,9 @@
 package com.morena.citTestBack.controller;
 
 import com.morena.citTestBack.dto.DTasksSquare;
+import com.morena.citTestBack.service.TasksSquareService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TasksSquareController {
 
+    private final TasksSquareService tasksSquareService;
+
     /**
-     * /api/square/create
+     * Creates square task
+     * /api/square/create POST
      * @param task json with list of long - inputMatrix
-     * @return
      */
     @PostMapping("/create")
     public ResponseEntity<?> createSquare(@RequestBody DTasksSquare task) {
-        return null;
+        return tasksSquareService.saveSquareTask(task) ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
 
     /**
@@ -33,7 +39,7 @@ public class TasksSquareController {
     /**
      * /api/square/solve
      * @param task json with list of long - inputMatrix
-     * @return
+
      */
     @PostMapping("/solve")
     public ResponseEntity<?> solve(@RequestBody DTasksSquare task) {
