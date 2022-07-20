@@ -46,13 +46,4 @@ public class TasksSquareController {
         return null;
     }
 
-    @PatchMapping("/upload")
-    public ResponseEntity<?> upload() {
-        return null;
-    }
-
-    @PatchMapping("/download")
-    public ResponseEntity<?> download() {
-        return null;
-    }
 }
