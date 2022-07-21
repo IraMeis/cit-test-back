@@ -2,6 +2,7 @@ package com.morena.citTestBack.controller;
 
 import com.morena.citTestBack.dto.DTasksSubstring;
 import com.morena.citTestBack.service.TasksSubstringService;
+import com.morena.citTestBack.util.SolvingTasks;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,11 @@ public class TasksSubstringController {
      */
     @PostMapping("/solve")
     public ResponseEntity<?> solve(@RequestBody DTasksSubstring task) {
-        return null;
+        if(!task.isCorrect())
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+
+        task.setArrayResult(SolvingTasks.solveSubstring(task.getArray1(), task.getArray2()));
+        return ResponseEntity.ok(task);
     }
 
 }

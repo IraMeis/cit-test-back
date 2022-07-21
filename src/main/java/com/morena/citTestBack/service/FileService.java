@@ -3,6 +3,7 @@ package com.morena.citTestBack.service;
 import com.morena.citTestBack.dto.DTasksSquare;
 import com.morena.citTestBack.dto.DTasksSubstring;
 import com.morena.citTestBack.util.JsonStringDTaskConvertor;
+import com.morena.citTestBack.util.SolvingTasks;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -40,10 +41,14 @@ public class FileService {
 
         if((resSq.isPresent() && resStr.isPresent()) || resSq.isEmpty() && resStr.isEmpty())
             return notParsedResponse;
-        else if (resSq.isPresent() && resSq.get().isCorrect())
-            return  ResponseEntity.ok(resSq.get());
-        else if (resStr.isPresent() && resStr.get().isCorrect())
+        else if (resSq.isPresent() && resSq.get().isCorrect()) {
+            return ResponseEntity.ok(resSq.get());
+        }
+        else if (resStr.isPresent() && resStr.get().isCorrect()) {
+            resStr.get().setArrayResult(
+                    SolvingTasks.solveSubstring(resStr.get().getArray1(), resStr.get().getArray2()));
             return ResponseEntity.ok(resStr.get());
+        }
 
         return notParsedResponse;
     }
