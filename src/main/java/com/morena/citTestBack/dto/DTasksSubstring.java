@@ -1,11 +1,14 @@
 package com.morena.citTestBack.dto;
 
+import com.morena.citTestBack.enums.TaskTypeEnum;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * POJO TasksSubstring
+ */
 @Getter
 @Setter
 @Builder
@@ -13,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DTasksSubstring implements DTask {
 
-    private final long typeCode = 1;
+    private final Long typeCode = TaskTypeEnum.taskSubstring.getCode();
 
     private Long id;
     private UUID uuid;
@@ -22,5 +25,7 @@ public class DTasksSubstring implements DTask {
 
     private List<String> array1;
     private List<String> array2;
+
+    private List<String> arrayResult;
 
 }

@@ -1,10 +1,14 @@
 package com.morena.citTestBack.dto;
 
+import com.morena.citTestBack.enums.TaskTypeEnum;
 import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * POJO TasksSquare
+ */
 @Getter
 @Setter
 @Builder
@@ -12,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DTasksSquare implements DTask {
 
-    private final long typeCode = 2;
+    private final Long typeCode = TaskTypeEnum.taskSquare.getCode();
 
     private Long id;
     private UUID uuid;
@@ -20,5 +24,7 @@ public class DTasksSquare implements DTask {
     private String modifiedTimestamp;
 
     private List<Long> inputMatrix;
+
+    private List<Long> outputMatrix;
 
 }
