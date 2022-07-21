@@ -28,6 +28,10 @@ public class TasksSubstringService {
 
     private static final LocalDateTimeConvertor convertor = new LocalDateTimeConvertor();
 
+    /**
+     * Saves task and its elements
+     * @return boolean isSaved
+     */
     public boolean saveSubstringTask(DTasksSubstring dTasksSubstring){
         if(dTasksSubstring.getArray1() == null ||dTasksSubstring.getArray2() == null
                 || dTasksSubstring.getArray2().isEmpty() || dTasksSubstring.getArray1().isEmpty())

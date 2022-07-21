@@ -26,6 +26,10 @@ public class TasksSquareService {
 
     private static final LocalDateTimeConvertor convertor = new LocalDateTimeConvertor();
 
+    /**
+     * Saves task and its elements
+     * @return boolean isSaved
+     */
     public boolean saveSquareTask(DTasksSquare dTasksSquare){
         if(dTasksSquare.getInputMatrix() == null || dTasksSquare.getInputMatrix().size() != ConstantUtil.getLineMatrixSize())
             return false;
