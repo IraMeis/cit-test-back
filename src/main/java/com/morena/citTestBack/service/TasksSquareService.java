@@ -6,6 +6,7 @@ import com.morena.citTestBack.entity.TaskSquareElements;
 import com.morena.citTestBack.entity.TasksSquare;
 import com.morena.citTestBack.repository.TaskSquareElementsRepository;
 import com.morena.citTestBack.repository.TasksSquareRepository;
+import com.morena.citTestBack.util.ConstantUtil;
 import com.morena.citTestBack.util.LocalDateTimeConvertor;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class TasksSquareService {
     private static final LocalDateTimeConvertor convertor = new LocalDateTimeConvertor();
 
     public boolean saveSquareTask(DTasksSquare dTasksSquare){
-        if(dTasksSquare.getInputMatrix() == null || dTasksSquare.getInputMatrix().size() != 9)
+        if(dTasksSquare.getInputMatrix() == null || dTasksSquare.getInputMatrix().size() != ConstantUtil.getLineMatrixSize())
             return false;
 
         TasksSquare taskEntity = new TasksSquare();
@@ -34,7 +35,7 @@ public class TasksSquareService {
 
         Set<TaskSquareElements> elemsSet = new HashSet<>();
 
-        for (int i = 0; i < 9; ++i) {
+        for (int i = 0; i < dTasksSquare.getInputMatrix().size(); ++i) {
             TaskSquareElements taskElem = new TaskSquareElements();
             taskElem.setTask(taskEntity);
             taskElem.setMatrixEntry(dTasksSquare.getInputMatrix().get(i));
@@ -52,12 +53,17 @@ public class TasksSquareService {
         List<DTask> dTasksSquares = new ArrayList<>();
 
         tasksSquares.forEach(task -> {
-            List<Long> matr = new ArrayList<>(9);
-            for (int i = 0; i < 9; i++) matr.add(0L);
 
-            if(task.getElements() != null && !task.getElements().isEmpty()) {
+            List<Long> matr = new ArrayList<>();
+
+            if(task.getElements() != null &&  task.getElements().size() == ConstantUtil.getLineMatrixSize()) {
+
+                for (int i = 0; i < task.getElements().size(); i++)
+                    matr.add(0L);
+
                 task.getElements().forEach(elem ->
                         matr.set(elem.getOrder().intValue(), elem.getMatrixEntry()));
+
                 dTasksSquares.add(DTasksSquare.builder()
                         .id(task.getUniqueId())
                         .uuid(task.getUuid())
