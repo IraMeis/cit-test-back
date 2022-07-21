@@ -1,5 +1,6 @@
 package com.morena.citTestBack.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,8 @@ public class TaskSubstringElements extends BaseModelEntity {
     @JoinColumn(name="element_type", referencedColumnName = "code")
     private DictTaskSubstringElementTypes elementType;
 
+    @JsonIgnore
+    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="task_ref", referencedColumnName = "unique_id")

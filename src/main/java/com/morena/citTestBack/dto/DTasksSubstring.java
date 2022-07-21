@@ -1,10 +1,9 @@
 package com.morena.citTestBack.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.morena.citTestBack.enums.TaskTypeEnum;
-import com.morena.citTestBack.util.ConstantUtil;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -31,11 +30,13 @@ public class DTasksSubstring implements DTask {
 
     private List<String> arrayResult;
 
+    @JsonIgnore
     public boolean isCorrect() {
         return getArray2() != null && !getArray2().isEmpty() &&
                 getArray1() != null && !getArray1().isEmpty();
     }
 
+    @JsonIgnore
     public boolean isCorrectCodeCheck() {
         return getTypeCode() != null &&
                 Objects.equals(getTypeCode(), TaskTypeEnum.taskSubstring.getCode()) &&

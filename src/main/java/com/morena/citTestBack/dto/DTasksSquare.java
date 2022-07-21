@@ -1,5 +1,6 @@
 package com.morena.citTestBack.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.morena.citTestBack.enums.TaskTypeEnum;
 import com.morena.citTestBack.util.ConstantUtil;
 import lombok.*;
@@ -7,7 +8,6 @@ import lombok.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * POJO TasksSquare
@@ -31,6 +31,7 @@ public class DTasksSquare implements DTask {
     private Long cost;
     private List<Long> outputMatrix;
 
+    @JsonIgnore
     public boolean isCorrect() {
         return getInputMatrix() != null && getInputMatrix().size() == ConstantUtil.getLineMatrixSize() &&
                 getInputMatrix()
@@ -39,6 +40,7 @@ public class DTasksSquare implements DTask {
                         .count() == ConstantUtil.getLineMatrixSize();
     }
 
+    @JsonIgnore
     public boolean isCorrectCodeCheck() {
         return getTypeCode() != null &&
                 Objects.equals(getTypeCode(), TaskTypeEnum.taskSquare.getCode()) &&

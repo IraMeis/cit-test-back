@@ -1,5 +1,6 @@
 package com.morena.citTestBack.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,8 @@ public class TaskSquareElements extends BaseModelEntity {
     @Column(name = "order_in_list")
     private Long order;
 
+    @JsonIgnore
+    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="task_ref", referencedColumnName = "unique_id")
