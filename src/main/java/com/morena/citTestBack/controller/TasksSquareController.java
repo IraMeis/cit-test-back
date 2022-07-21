@@ -17,7 +17,8 @@ public class TasksSquareController {
     /**
      * Creates square task
      * /api/square/create POST
-     * @param task json with list of long - inputMatrix
+     * @param task DTasksSquare, inputMatrix required
+     * @return 200 - ok, 406 - error related to data format
      */
     @PostMapping("/create")
     public ResponseEntity<?> createSquare(@RequestBody DTasksSquare task) {
@@ -27,19 +28,10 @@ public class TasksSquareController {
     }
 
     /**
-     * /api/square/getTask/{id}
-     * @param id square task unique id
-     * @return
-     */
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getTask(@PathVariable Long id) {
-        return null;
-    }
-
-    /**
-     * /api/square/solve
-     * @param task json with list of long - inputMatrix
-
+     * Solves given {@link DTasksSquare}
+     * /api/square/solve POST
+     * @param task DTasksSquare, inputMatrix required
+     * @return DTasksSquare with outputMatrix, status 200 - ok, 406 - error related to data format
      */
     @PostMapping("/solve")
     public ResponseEntity<?> solve(@RequestBody DTasksSquare task) {

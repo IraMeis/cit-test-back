@@ -8,6 +8,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
+/**
+ * Class for square task
+ */
 @Entity
 @Table(name = "tasks_substring", schema = "public")
 @Getter

@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Class for substring task
+ */
 @Entity
 @Table(name = "tasks_square", schema = "public")
 @Getter

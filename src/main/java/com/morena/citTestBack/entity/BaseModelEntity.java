@@ -13,6 +13,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Parent class for entities <p/>
+ * Common entity fields, equals and hash code
+ */
 @MappedSuperclass
 @Getter
 @Setter

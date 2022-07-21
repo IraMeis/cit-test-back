@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * Class for elements of substring task (array entries)
+ */
 @Entity
 @Table(name = "task_substring_elements", schema = "public")
 @Getter

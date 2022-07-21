@@ -25,17 +25,21 @@ public class FilterService {
                                               LocalDate from,
                                               LocalDate to) {
 
+        //add is Deleted check
         predicateSquare =  ExpressionUtils.allOf(predicateSquare,
                 QTasksSquare.tasksSquare.isDeleted.isFalse());
         predicateSubstring =  ExpressionUtils.allOf(predicateSubstring,
                 QTasksSubstring.tasksSubstring.isDeleted.isFalse());
 
+        //created after
         if(from != null) {
             predicateSquare = ExpressionUtils.allOf(predicateSquare,
                     QTasksSquare.tasksSquare.createdTimestamp.after(from.atStartOfDay()));
             predicateSubstring =  ExpressionUtils.allOf(predicateSubstring,
                     QTasksSubstring.tasksSubstring.createdTimestamp.after(from.atStartOfDay()));
         }
+
+        //created before
         if(to != null) {
             predicateSquare = ExpressionUtils.allOf(predicateSquare,
                     QTasksSquare.tasksSquare.createdTimestamp.before(to.atTime(23,59,59)));
@@ -43,13 +47,16 @@ public class FilterService {
                     QTasksSubstring.tasksSubstring.createdTimestamp.before(to.atTime(23,59,59)));
         }
 
+        //type - substring & square
         if((inSquare && inSubstring) || (!inSquare && !inSubstring)) {
             List<DTask> result = tasksSquareService.findByPredicate(predicateSquare);
             result.addAll(tasksSubstringService.findByPredicate(predicateSubstring));
             return ResponseEntity.ok(result);
         }
+        //type - square
         else if (inSquare)
             return ResponseEntity.ok(tasksSquareService.findByPredicate(predicateSquare));
+        //type - substring
         else
             return ResponseEntity.ok(tasksSubstringService.findByPredicate(predicateSubstring));
     }

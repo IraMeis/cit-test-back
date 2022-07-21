@@ -18,6 +18,11 @@ import java.util.Objects;
 @Service
 public class FileService {
 
+    /**
+     * Checks and parse multipart file data into DTask, returns solved task
+     * @param file multipart file wirh task
+     * @return solved task
+     */
     public ResponseEntity<?> solveFile (MultipartFile file){
 
         String json;
@@ -43,6 +48,10 @@ public class FileService {
 
     }
 
+    /**
+     * @param dTasksSquare DTasksSquare
+     * @return response with blob of dTasksSquare
+     */
     public ResponseEntity<?> castSQtoFile (DTasksSquare dTasksSquare) {
 
         if(dTasksSquare.getTypeCode() == null ||
@@ -54,7 +63,10 @@ public class FileService {
         return objToFileResponse(dTasksSquare);
     }
 
-
+    /**
+     * @param dTasksSubstring DTasksSubstring
+     * @return response with blob of dTasksSubstring
+     */
     public ResponseEntity<?> castSTRtoFile (DTasksSubstring dTasksSubstring) {
 
         if(dTasksSubstring.getTypeCode() == null ||
@@ -65,9 +77,12 @@ public class FileService {
         return objToFileResponse(dTasksSubstring);
     }
 
-    private<T> ResponseEntity<?> objToFileResponse(T task) {
+    /**
+     * Converts object into json String, returns ResponseEntity with String bytes
+     */
+    private<T> ResponseEntity<?> objToFileResponse(T obj) {
 
-        var jsonStr = JsonStringDTaskConvertor.convertToJsonString(task);
+        var jsonStr = JsonStringDTaskConvertor.convertToJsonString(obj);
 
         if (jsonStr.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();

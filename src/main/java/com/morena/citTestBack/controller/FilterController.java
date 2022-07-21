@@ -22,8 +22,10 @@ public class FilterController {
     private final FilterService filterService;
 
     /**
-     * Filter tasks by given qdsl predicate (using BaseModelEntity fields) and task including params
+     * Filter tasks by given qdsl predicate (using BaseModelEntity fields) and task special params
      * /api/filter GET
+     * @param from after - created time
+     * @param to before - created time
      * @param inSquare param of including square tasks
      * @param inSubstring param of including substring tasks
      * @param predicateSquare qdsl predicate

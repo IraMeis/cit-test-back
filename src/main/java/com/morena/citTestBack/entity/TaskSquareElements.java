@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * Class for elements of square task (matrix entries)
+ */
 @Entity
 @Table(name = "task_square_elements", schema = "public")
 @Getter

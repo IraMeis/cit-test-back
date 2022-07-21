@@ -17,7 +17,8 @@ public class TasksSubstringController {
     /**
      * Creates substring task
      * /api/substring/create POST
-     * @param task json with 2 lists of strings - array1 and array2
+     * @param task DTasksSubstring, array1 and array2 required
+     * @return 200 - ok, 406 - error related to data format
      */
     @PostMapping("/create")
     public ResponseEntity<?> createSubstring(@RequestBody DTasksSubstring task) {
@@ -27,19 +28,10 @@ public class TasksSubstringController {
     }
 
     /**
-     * /api/substring/getTask/{id}
-     * @param id substring task unique id
-     * @return
-     */
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getTask(@PathVariable Long id) {
-        return null;
-    }
-
-    /**
-     * /api/substring/solve
-     * @param task json with 2 lists of strings - array1 and array2
-     * @return
+     * Solves given {@link DTasksSubstring}
+     * /api/substring/solve POST
+     * @param task DTasksSubstring, array1 and array2 required
+     * @return DTasksSubstring with arrayResult, status 200 - ok, 406 - error related to data format
      */
     @PostMapping("/solve")
     public ResponseEntity<?> solve(@RequestBody DTasksSubstring task) {

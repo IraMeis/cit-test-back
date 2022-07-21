@@ -8,6 +8,9 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Parent class for dictionary entities
+ */
 @MappedSuperclass
 @Getter
 @Setter
