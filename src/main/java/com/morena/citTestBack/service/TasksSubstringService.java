@@ -33,8 +33,7 @@ public class TasksSubstringService {
      * @return boolean isSaved
      */
     public boolean saveSubstringTask(DTasksSubstring dTasksSubstring){
-        if(dTasksSubstring.getArray1() == null ||dTasksSubstring.getArray2() == null
-                || dTasksSubstring.getArray2().isEmpty() || dTasksSubstring.getArray1().isEmpty())
+        if(!dTasksSubstring.isCorrect())
             return false;
 
         var typeA1 =

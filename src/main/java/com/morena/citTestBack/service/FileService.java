@@ -2,8 +2,6 @@ package com.morena.citTestBack.service;
 
 import com.morena.citTestBack.dto.DTasksSquare;
 import com.morena.citTestBack.dto.DTasksSubstring;
-import com.morena.citTestBack.enums.TaskTypeEnum;
-import com.morena.citTestBack.util.ConstantUtil;
 import com.morena.citTestBack.util.JsonStringDTaskConvertor;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 @Service
 public class FileService {
@@ -30,6 +27,7 @@ public class FileService {
 
         if(file.isEmpty())
             return notParsedResponse;
+
         try {
             json = new String(file.getBytes(), StandardCharsets.UTF_8);
         }
@@ -42,10 +40,12 @@ public class FileService {
 
         if((resSq.isPresent() && resStr.isPresent()) || resSq.isEmpty() && resStr.isEmpty())
             return notParsedResponse;
-        else if (resSq.isPresent())
+        else if (resSq.isPresent() && resSq.get().isCorrect())
             return  ResponseEntity.ok(resSq.get());
-        else return ResponseEntity.ok(resStr.get());
+        else if (resStr.isPresent() && resStr.get().isCorrect())
+            return ResponseEntity.ok(resStr.get());
 
+        return notParsedResponse;
     }
 
     /**
@@ -53,13 +53,8 @@ public class FileService {
      * @return response with blob of dTasksSquare
      */
     public ResponseEntity<?> castSQtoFile (DTasksSquare dTasksSquare) {
-
-        if(dTasksSquare.getTypeCode() == null ||
-                        dTasksSquare.getInputMatrix().isEmpty() ||
-                        dTasksSquare.getInputMatrix().size() != ConstantUtil.getLineMatrixSize() ||
-                        !Objects.equals(dTasksSquare.getTypeCode(), TaskTypeEnum.taskSquare.getCode()))
+        if(!dTasksSquare.isCorrectCodeCheck())
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-
         return objToFileResponse(dTasksSquare);
     }
 
@@ -68,12 +63,8 @@ public class FileService {
      * @return response with blob of dTasksSubstring
      */
     public ResponseEntity<?> castSTRtoFile (DTasksSubstring dTasksSubstring) {
-
-        if(dTasksSubstring.getTypeCode() == null ||
-                dTasksSubstring.getArray2().isEmpty() || dTasksSubstring.getArray1().isEmpty() ||
-                !Objects.equals(dTasksSubstring.getTypeCode(), TaskTypeEnum.taskSubstring.getCode()))
+        if(!dTasksSubstring.isCorrectCodeCheck())
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-
         return objToFileResponse(dTasksSubstring);
     }
 

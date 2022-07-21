@@ -31,7 +31,7 @@ public class TasksSquareService {
      * @return boolean isSaved
      */
     public boolean saveSquareTask(DTasksSquare dTasksSquare){
-        if(dTasksSquare.getInputMatrix() == null || dTasksSquare.getInputMatrix().size() != ConstantUtil.getLineMatrixSize())
+        if(!dTasksSquare.isCorrect())
             return false;
 
         TasksSquare taskEntity = new TasksSquare();
