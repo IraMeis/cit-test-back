@@ -42,6 +42,12 @@ public class FileService {
         if((resSq.isPresent() && resStr.isPresent()) || resSq.isEmpty() && resStr.isEmpty())
             return notParsedResponse;
         else if (resSq.isPresent() && resSq.get().isCorrect()) {
+            var solved = SolvingTasks.solveSquare3X3(resSq.get().getInputMatrix());
+            if(solved.isEmpty())
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
+            resSq.get().setOutputMatrix(solved.get().subList(1, solved.get().size()));
+            resSq.get().setCost(solved.get().get(0));
             return ResponseEntity.ok(resSq.get());
         }
         else if (resStr.isPresent() && resStr.get().isCorrect()) {

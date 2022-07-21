@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * POJO TasksSquare
@@ -27,10 +28,15 @@ public class DTasksSquare implements DTask {
 
     private List<Long> inputMatrix;
 
+    private Long cost;
     private List<Long> outputMatrix;
 
     public boolean isCorrect() {
-        return getInputMatrix() != null && getInputMatrix().size() == ConstantUtil.getLineMatrixSize();
+        return getInputMatrix() != null && getInputMatrix().size() == ConstantUtil.getLineMatrixSize() &&
+                getInputMatrix()
+                        .stream()
+                        .filter(elem -> elem < 10L && elem > 0L)
+                        .count() == ConstantUtil.getLineMatrixSize();
     }
 
     public boolean isCorrectCodeCheck() {

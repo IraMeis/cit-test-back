@@ -2,6 +2,7 @@ package com.morena.citTestBack.controller;
 
 import com.morena.citTestBack.dto.DTasksSquare;
 import com.morena.citTestBack.service.TasksSquareService;
+import com.morena.citTestBack.util.SolvingTasks;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,16 @@ public class TasksSquareController {
      */
     @PostMapping("/solve")
     public ResponseEntity<?> solve(@RequestBody DTasksSquare task) {
-        return null;
+        if(!task.isCorrect())
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+
+        var solved = SolvingTasks.solveSquare3X3(task.getInputMatrix());
+        if(solved.isEmpty())
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
+        task.setOutputMatrix(solved.get().subList(1, solved.get().size()));
+        task.setCost(solved.get().get(0));
+        return ResponseEntity.ok(task);
     }
 
 }

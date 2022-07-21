@@ -1,6 +1,6 @@
 package com.morena.citTestBack.util;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SolvingTasks {
@@ -25,11 +25,34 @@ public class SolvingTasks {
     }
 
     /**
+     * @return sum|a[i] - b[i]| foreach i
+     */
+   private static long getCost(List<Long> l0, List<Long> l1) {
+       if(l0.size() != l1.size())
+           return -1;
+
+       int cost = 0;
+       for (int i = 0; i < l0.size(); i++)
+               cost += Math.abs(l0.get(i) - l1.get(i));
+       return cost;
+   }
+
+    /**
      * Solves square task
      * @param matrix 3 x 3
-     * @return List<List<Integer>> magic square
+     * @return List<Integer>> where 0 element is cost and others - magic square
      */
-    public static List<List<Integer>> solveSquare (List<List<Integer>> matrix) {
-        return null;
+    public static Optional<ArrayList<Long>> solveSquare3X3 (List<Long> matrix) {
+        return Arrays.stream(ConstantUtil.getMagicSquares3X3())
+                .map(magicElem -> {
+                    var elemAsList = new ArrayList<Long>();
+                    for (int i = 0; i < 3; i++)
+                        for (int j = 0; j < 3; j++)
+                            elemAsList.add((long) magicElem[i][j]);
+                    var costAndElem = new ArrayList<Long>();
+                    costAndElem.add(getCost(matrix, elemAsList));
+                    costAndElem.addAll(elemAsList);
+                    return costAndElem;
+                }).min(Comparator.comparing(list -> list.get(0)));
     }
 }
