@@ -38,7 +38,7 @@ public class DTasksSubstring implements DTask {
 
     public boolean isCorrectCodeCheck() {
         return getTypeCode() != null &&
-                Objects.equals(getTypeCode(), TaskTypeEnum.taskSquare.getCode()) &&
+                Objects.equals(getTypeCode(), TaskTypeEnum.taskSubstring.getCode()) &&
                 isCorrect();
     }
 }
