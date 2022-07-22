@@ -36,6 +36,7 @@ public class DTasksSquare implements DTask {
         return getInputMatrix() != null && getInputMatrix().size() == ConstantUtil.getLineMatrixSize() &&
                 getInputMatrix()
                         .stream()
+                        .distinct()
                         .filter(elem -> elem < 10L && elem > 0L)
                         .count() == ConstantUtil.getLineMatrixSize();
     }
