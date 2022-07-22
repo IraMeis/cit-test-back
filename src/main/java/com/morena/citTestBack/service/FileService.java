@@ -46,8 +46,8 @@ public class FileService {
             if(solved.isEmpty())
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
-            resSq.get().setOutputMatrix(solved.get().subList(1, solved.get().size()));
-            resSq.get().setCost(solved.get().get(0));
+            resSq.get().setOutputMatrix(solved.subList(1, solved.size()));
+            resSq.get().setCost(solved.get(0));
             return ResponseEntity.ok(resSq.get());
         }
         else if (resStr.isPresent() && resStr.get().isCorrect()) {

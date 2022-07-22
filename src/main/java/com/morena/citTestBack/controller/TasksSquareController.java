@@ -43,8 +43,8 @@ public class TasksSquareController {
         if(solved.isEmpty())
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
-        task.setOutputMatrix(solved.get().subList(1, solved.get().size()));
-        task.setCost(solved.get().get(0));
+        task.setOutputMatrix(solved.subList(1, solved.size()));
+        task.setCost(solved.get(0));
         return ResponseEntity.ok(task);
     }
 

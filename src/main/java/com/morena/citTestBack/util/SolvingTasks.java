@@ -42,8 +42,8 @@ public class SolvingTasks {
      * @param matrix 3 x 3
      * @return List<Integer>> where 0 element is cost and others - magic square
      */
-    public static Optional<ArrayList<Long>> solveSquare3X3 (List<Long> matrix) {
-        return Arrays.stream(ConstantUtil.getMagicSquares3X3())
+    public static List<Long> solveSquare3X3 (List<Long> matrix) {
+        return Arrays.stream(new MagicAndHalfMagicSquares().getSquares())
                 .map(magicElem -> {
                     var elemAsList = new ArrayList<Long>();
                     for (int i = 0; i < 3; i++)
@@ -53,6 +53,9 @@ public class SolvingTasks {
                     costAndElem.add(getCost(matrix, elemAsList));
                     costAndElem.addAll(elemAsList);
                     return costAndElem;
-                }).min(Comparator.comparing(list -> list.get(0)));
+                })
+                .min(Comparator.comparing(list -> list.get(0)))
+                .map(list -> (List<Long>) list)
+                .orElse(Collections.emptyList());
     }
 }
