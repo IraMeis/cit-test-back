@@ -40,7 +40,7 @@ public class SolvingTasks {
     /**
      * Solves square task
      * @param matrix 3 x 3
-     * @return List<Integer>> where 0 element is cost and others - magic square
+     * @return List<Long> where 0 element is cost and others - magic square
      */
     public static List<Long> solveSquare3X3 (List<Long> matrix) {
         return Arrays.stream(new MagicAndHalfMagicSquares().getSquares())

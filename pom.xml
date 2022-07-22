@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.morena</groupId>
 	<artifactId>citTestBack</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>citTestBack</name>
 	<description>Test project for CIT</description>
 	<properties>
